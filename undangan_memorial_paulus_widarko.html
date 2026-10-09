@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Memperingati 5 Tahun Wafatnya Paulus Widarko</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Lora:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        gold: {
+                            300: '#FDE047',
+                            400: '#FACC15',
+                            500: '#EAB308',
+                            600: '#CA8A04',
+                            700: '#A16207',
+                        },
+                        dark: {
+                            900: '#0a0a0a',
+                            800: '#171717',
+                            700: '#262626',
+                        }
+                    },
+                    fontFamily: {
+                        serif: ['"Playfair Display"', 'serif'],
+                        body: ['"Lora"', 'serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            background-color: #0a0a0a;
+            color: #e5e5e5;
+            background-image: radial-gradient(circle at top, #1f1f1f 0%, #0a0a0a 100%);
+            background-attachment: fixed;
+        }
+
+        .text-gold-gradient {
+            background: linear-gradient(to right, #CA8A04, #FDE047, #FACC15, #CA8A04);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        /* Desain Bingkai Emas Tebal */
+        .gold-frame-wrapper {
+            display: inline-block;
+            position: relative;
+            padding: 16px;
+            background: linear-gradient(135deg, #B38728 0%, #FBF5B7 25%, #CA8A04 50%, #FBF5B7 75%, #AA7C11 100%);
+            border-radius: 4px;
+            box-shadow: 
+                0 25px 50px -12px rgba(0, 0, 0, 1),
+                0 0 25px rgba(253, 224, 71, 0.15),
+                inset 0 0 10px rgba(255, 255, 255, 0.5),
+                inset 0 0 3px 1px rgba(0, 0, 0, 0.6);
+        }
+
+        /* Pembatas hitam di dalam bingkai sebelum foto */
+        .gold-frame-inner {
+            background-color: #050505;
+            padding: 5px;
+            border-radius: 2px;
+            box-shadow: inset 0 0 20px rgba(0,0,0,0.9);
+            border: 1px solid #4a360d;
+            position: relative;
+        }
+
+        /* Animasi Muncul */
+        .fade-in-up {
+            animation: fadeInUp 1.2s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+            opacity: 0;
+            transform: translateY(30px);
+        }
+        .delay-100 { animation-delay: 200ms; }
+        .delay-300 { animation-delay: 400ms; }
+        .delay-500 { animation-delay: 600ms; }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Input styling form */
+        input:focus, select:focus, textarea:focus {
+            outline: none;
+            border-color: #CA8A04 !important;
+            box-shadow: 0 0 0 1px #CA8A04;
+        }
+
+        /* Custom Scrollbar */
+        .custom-scrollbar::-webkit-scrollbar { width: 6px; }
+        .custom-scrollbar::-webkit-scrollbar-track { background: #171717; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: #CA8A04; border-radius: 10px; }
+    </style>
+</head>
+<body class="font-body antialiased min-h-screen flex flex-col items-center selection:bg-gold-500 selection:text-black pb-12">
+
+    <main class="w-full max-w-3xl px-5 py-12 md:py-20 mx-auto flex flex-col items-center text-center space-y-12">
+        
+        <header class="fade-in-up space-y-4">
+            <p class="text-xs md:text-sm tracking-[0.35em] text-gold-500 uppercase font-serif">Mengenang Dalam Kasih</p>
+            <h1 class="text-3xl md:text-5xl font-serif font-bold text-white leading-tight">
+                Memperingati 5 Tahun <br> Wafatnya
+            </h1>
+        </header>
+
+        <section class="fade-in-up delay-100 relative mt-4">
+            <!-- Ornamen Daun -->
+            <div class="absolute -top-10 -left-12 md:-left-16 text-gold-600/20 text-5xl md:text-6xl pointer-events-none">
+                <i class="fa-solid fa-leaf"></i>
+            </div>
+            <div class="absolute -bottom-10 -right-12 md:-right-16 text-gold-600/20 text-5xl md:text-6xl pointer-events-none transform scale-x-[-1] scale-y-[-1]">
+                <i class="fa-solid fa-leaf"></i>
+            </div>
+
+            <!-- Area Interaktif Bingkai Emas -->
+            <div class="gold-frame-wrapper z-10 relative">
+                <div id="frame-container" class="gold-frame-inner w-[240px] h-[320px] md:w-[260px] md:h-[340px] flex items-center justify-center overflow-hidden relative group">
+                    
+                    <!-- Input File Tersembunyi -->
+                    <input type="file" id="photo-upload" accept="image/*" class="hidden">
+                    
+                    <!-- Tampilan Awal (Prompt Unggah) -->
+                    <div id="upload-prompt" class="absolute inset-0 flex flex-col items-center justify-center bg-dark-900 cursor-pointer hover:bg-dark-800 transition-colors z-20">
+                        <div class="w-16 h-16 rounded-full bg-dark-800 border border-gold-600/30 flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
+                            <i class="fa-solid fa-image text-2xl text-gold-500"></i>
+                        </div>
+                        <span class="text-gold-400 text-sm font-serif">Klik untuk Unggah Foto</span>
+                        <span class="text-gray-500 text-xs mt-1 text-center px-4">(Sekali unggah akan menjadi permanen)</span>
+                    </div>
+
+                    <!-- Elemen Gambar -->
+                    <img id="frame-image" src="" alt="Foto Paulus Widarko" 
+                         class="hidden w-full h-full object-cover z-10 filter contrast-[1.05]">
+                </div>
+            </div>
+        </section>
+
+        <section class="fade-in-up delay-300 space-y-4 w-full">
+            <h2 class="text-4xl md:text-5xl font-serif font-bold text-gold-gradient tracking-wide">
+                Paulus Widarko
+            </h2>
+            <div class="flex flex-col md:flex-row items-center justify-center gap-2 md:gap-6 text-gray-300 font-serif text-lg">
+                <span class="flex items-center gap-2">
+                    <i class="fa-solid fa-star text-gold-600 text-xs"></i> 
+                    Lahir: <span class="text-white">20 April 1942</span>
+                </span>
+                <span class="hidden md:block text-gold-700/50">|</span>
+                <span class="flex items-center gap-2">
+                    <i class="fa-solid fa-cross text-gold-600 text-xs"></i> 
+                    Wafat: <span class="text-white">21 Oktober 2021</span>
+                </span>
+            </div>
+        </section>
+
+        <!-- Divider -->
+        <div class="w-24 h-px bg-gradient-to-r from-transparent via-gold-600 to-transparent fade-in-up delay-300"></div>
+
+        <section class="fade-in-up delay-500 w-full max-w-lg bg-dark-800 border border-gold-700/20 rounded-2xl p-8 shadow-2xl relative overflow-hidden">
+            <div class="absolute top-0 inset-x-0 h-1 bg-gradient-to-r from-transparent via-gold-500 to-transparent opacity-50"></div>
+            
+            <h3 class="text-2xl font-serif text-gold-400 mb-8">Informasi Acara Peringatan</h3>
+            
+            <div class="space-y-6 text-left">
+                <div class="flex items-start gap-4">
+                    <div class="w-12 h-12 rounded-full bg-dark-900 border border-gold-700/30 flex items-center justify-center shrink-0 text-gold-500 shadow-inner">
+                        <i class="fa-regular fa-calendar-days text-xl"></i>
+                    </div>
+                    <div>
+                        <p class="text-xs text-gray-500 uppercase tracking-widest mb-1">Waktu Pelaksanaan</p>
+                        <h4 class="font-semibold text-lg text-white">Rabu, 21 Oktober 2026</h4>
+                        <p class="text-gray-400 mt-1">Pukul 18.00 WIB - Selesai</p>
+                    </div>
+                </div>
+
+                <div class="flex items-start gap-4">
+                    <div class="w-12 h-12 rounded-full bg-dark-900 border border-gold-700/30 flex items-center justify-center shrink-0 text-gold-500 shadow-inner">
+                        <i class="fa-solid fa-place-of-worship text-xl"></i>
+                    </div>
+                    <div>
+                        <p class="text-xs text-gray-500 uppercase tracking-widest mb-1">Tempat</p>
+                        <h4 class="font-semibold text-lg text-white">Biara Berthier</h4>
+                        <p class="text-gray-400 mt-1">Sunter, Jakarta Utara</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="fade-in-up delay-500 w-full max-w-xl mt-4">
+            <h3 class="text-2xl font-serif text-gold-400 mb-6">Konfirmasi Kehadiran & Doa</h3>
+            
+            <div class="bg-dark-800 rounded-2xl p-6 md:p-8 border border-white/5 shadow-xl text-left relative">
+                
+                <div id="auth-loading" class="absolute inset-0 bg-dark-800/90 z-20 flex flex-col items-center justify-center rounded-2xl backdrop-blur-sm">
+                    <i class="fa-solid fa-spinner fa-spin text-gold-500 text-3xl mb-3"></i>
+                    <p class="text-gray-300 text-sm font-serif">Mempersiapkan buku tamu...</p>
+                </div>
+
+                <form id="rsvp-form" class="space-y-5">
+                    <div>
+                        <label for="name" class="block text-sm text-gray-300 mb-2">Nama Lengkap</label>
+                        <input type="text" id="name" required placeholder="Tulis nama Anda"
+                            class="w-full bg-dark-900 border border-dark-700 rounded-xl px-4 py-3 text-white transition-colors focus:ring-1 focus:ring-gold-500">
+                    </div>
+                    
+                    <div>
+                        <label for="status" class="block text-sm text-gray-300 mb-2">Kehadiran</label>
+                        <select id="status" required
+                            class="w-full bg-dark-900 border border-dark-700 rounded-xl px-4 py-3 text-white transition-colors appearance-none">
+                            <option value="" disabled selected>Pilih konfirmasi kehadiran...</option>
+                            <option value="Hadir">Saya akan hadir</option>
+                            <option value="Tidak Hadir">Maaf, saya berhalangan</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label for="message" class="block text-sm text-gray-300 mb-2">Ucapan Kenangan / Doa</label>
+                        <textarea id="message" rows="3" required placeholder="Tuliskan doa atau kenangan indah..."
+                            class="w-full bg-dark-900 border border-dark-700 rounded-xl px-4 py-3 text-white transition-colors resize-none focus:ring-1 focus:ring-gold-500"></textarea>
+                    </div>
+
+                    <div id="form-alert" class="hidden text-sm p-4 rounded-xl text-center border font-medium"></div>
+
+                    <button type="submit" id="submit-btn"
+                        class="w-full bg-gradient-to-r from-gold-600 to-gold-400 text-dark-900 font-bold font-serif text-lg py-3.5 rounded-xl hover:from-gold-500 hover:to-gold-300 transition-all shadow-[0_0_15px_rgba(202,138,4,0.2)] flex justify-center items-center">
+                        <span id="submit-text">Kirim Pesan</span>
+                        <i id="submit-spinner" class="fa-solid fa-circle-notch fa-spin hidden ml-2"></i>
+                    </button>
+                </form>
+            </div>
+        </section>
+
+        <section class="fade-in-up delay-500 w-full max-w-xl mt-4">
+            <div class="flex items-center justify-between border-b border-dark-700 pb-3 mb-6">
+                <h3 class="text-lg font-serif text-white">Buku Tamu</h3>
+                <div class="bg-dark-900 border border-dark-700 text-gold-400 text-sm px-3 py-1 rounded-full">
+                    <span id="rsvp-count">0</span> Ucapan
+                </div>
+            </div>
+            
+            <div id="messages-container" class="space-y-4 text-left max-h-[400px] overflow-y-auto pr-2 custom-scrollbar">
+                <p id="empty-state" class="text-center text-gray-500 py-8 italic hidden">
+                    Belum ada ucapan. Silakan tinggalkan doa Anda.
+                </p>
+            </div>
+        </section>
+
+    </main>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+        import { getAuth, signInAnonymously, signInWithCustomToken } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+        import { getFirestore, collection, addDoc, onSnapshot } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+
+        // ==========================================
+        // FITUR UPLOAD FOTO PERMANEN (LOCALSTORAGE)
+        // ==========================================
+        const photoUpload = document.getElementById('photo-upload');
+        const frameImage = document.getElementById('frame-image');
+        const uploadPrompt = document.getElementById('upload-prompt');
+        const LOCAL_STORAGE_KEY = 'memorialPhotoPaulus';
+
+        // Fungsi untuk menangani tampilan foto jika sudah ada
+        function setPermanentPhoto(base64Image) {
+            frameImage.src = base64Image;
+            frameImage.classList.remove('hidden');
+            uploadPrompt.classList.add('hidden');
+            
+            // Menonaktifkan input dan interaksi pointer agar tidak bisa diklik lagi
+            photoUpload.disabled = true;
+            uploadPrompt.style.pointerEvents = 'none';
+        }
+
+        // 1. Cek apakah foto sudah pernah diunggah sebelumnya di localStorage
+        const savedPhoto = localStorage.getItem(LOCAL_STORAGE_KEY);
+        if (savedPhoto) {
+            // Jika ada, langsung tampilkan permanen
+            setPermanentPhoto(savedPhoto);
+        } else {
+            // Jika belum ada, pasang event listener untuk mengizinkan klik upload
+            uploadPrompt.addEventListener('click', () => {
+                photoUpload.click();
+            });
+        }
+
+        // 2. Tangani saat pengguna memilih file gambar
+        photoUpload.addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(event) {
+                    const base64Image = event.target.result;
+                    
+                    // Simpan ke localStorage agar permanen
+                    try {
+                        localStorage.setItem(LOCAL_STORAGE_KEY, base64Image);
+                        // Ubah tampilan menjadi permanen
+                        setPermanentPhoto(base64Image);
+                    } catch (error) {
+                        console.error('Local storage penuh atau terjadi kesalahan:', error);
+                        // Jika storage gagal (misal file terlalu besar), tetap tampilkan gambarnya saja di sesi ini
+                        setPermanentPhoto(base64Image);
+                    }
+                }
+                // Membaca file sebagai Data URL (base64)
+                reader.readAsDataURL(file);
+            }
+        });
+
+
+        // ==========================================
+        // FITUR FIREBASE RSVP & GUESTBOOK
+        // ==========================================
+        const appId = typeof __app_id !== 'undefined' ? __app_id : 'memorial-paulus-widarko-interaktif';
+        const firebaseConfig = typeof __firebase_config !== 'undefined' ? JSON.parse(__firebase_config) : {};
+        const initialAuthToken = typeof __initial_auth_token !== 'undefined' ? __initial_auth_token : null;
+
+        let app, db, auth;
+        let currentUser = null;
+
+        const authLoading = document.getElementById('auth-loading');
+        const rsvpForm = document.getElementById('rsvp-form');
+        const submitBtn = document.getElementById('submit-btn');
+        const submitText = document.getElementById('submit-text');
+        const submitSpinner = document.getElementById('submit-spinner');
+        const formAlert = document.getElementById('form-alert');
+        const messagesContainer = document.getElementById('messages-container');
+        const emptyState = document.getElementById('empty-state');
+        const rsvpCount = document.getElementById('rsvp-count');
+
+        function showNotification(msg, type = 'success') {
+            formAlert.textContent = msg;
+            formAlert.className = `text-sm p-4 rounded-xl text-center border font-medium mb-4 block transition-all`;
+            
+            if (type === 'error') {
+                formAlert.classList.add('bg-red-900/40', 'border-red-800', 'text-red-300');
+            } else {
+                formAlert.classList.add('bg-green-900/40', 'border-green-800', 'text-green-300');
+            }
+            setTimeout(() => { formAlert.classList.add('hidden'); }, 5000);
+        }
+
+        function escapeHTML(str) {
+            return str.replace(/[&<>'"]/g, tag => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;' }[tag] || tag));
+        }
+
+        async function initApp() {
+            try {
+                app = initializeApp(firebaseConfig);
+                db = getFirestore(app);
+                auth = getAuth(app);
+
+                // Authentication (Rule 3)
+                if (initialAuthToken) {
+                    await signInWithCustomToken(auth, initialAuthToken);
+                } else {
+                    await signInAnonymously(auth);
+                }
+                
+                currentUser = auth.currentUser;
+                authLoading.style.display = 'none';
+                
+                loadGuestbookMessages();
+            } catch (error) {
+                console.error("Firebase Init Error:", error);
+                authLoading.innerHTML = `<p class="text-red-400 text-sm p-4 text-center">Gagal menyambung ke server database. Silakan muat ulang halaman.</p>`;
+            }
+        }
+
+        function loadGuestbookMessages() {
+            // Rule 1: Strict paths for public data
+            const guestbookRef = collection(db, 'artifacts', appId, 'public', 'data', 'guestbook_memorial');
+            
+            onSnapshot(guestbookRef, (snapshot) => {
+                const messages = [];
+                snapshot.forEach(doc => messages.push({ id: doc.id, ...doc.data() }));
+
+                // Rule 2: In-memory sorting (no complex DB queries)
+                messages.sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
+                rsvpCount.textContent = messages.length;
+
+                if (messages.length === 0) {
+                    messagesContainer.innerHTML = '';
+                    emptyState.classList.remove('hidden');
+                    messagesContainer.appendChild(emptyState);
+                    return;
+                }
+
+                messagesContainer.innerHTML = '';
+                emptyState.classList.add('hidden');
+
+                messages.forEach(msg => {
+                    const dateObj = new Date(msg.timestamp);
+                    const formattedDate = dateObj.toLocaleDateString('id-ID', { day: 'numeric', month: 'short', year: 'numeric' });
+                    
+                    const isAttending = msg.status === 'Hadir';
+                    const badgeStyle = isAttending 
+                        ? 'bg-green-900/30 text-green-400 border-green-800' 
+                        : 'bg-dark-900 text-gray-500 border-dark-700';
+
+                    const card = document.createElement('div');
+                    card.className = 'bg-dark-800/80 p-4 md:p-5 rounded-xl border border-white/5 relative overflow-hidden';
+                    
+                    if(isAttending) {
+                        card.innerHTML += `<div class="absolute left-0 top-0 bottom-0 w-1 bg-gold-600/50"></div>`;
+                    }
+
+                    card.innerHTML += `
+                        <div class="flex justify-between items-start mb-2 md:mb-3">
+                            <div>
+                                <h4 class="text-gold-300 font-medium text-sm md:text-base">${escapeHTML(msg.name)}</h4>
+                                <span class="text-[10px] border px-2 py-0.5 rounded uppercase tracking-wider mt-1 inline-block ${badgeStyle}">
+                                    ${escapeHTML(msg.status)}
+                                </span>
+                            </div>
+                            <span class="text-[11px] md:text-xs text-gray-500 whitespace-nowrap ml-2">${formattedDate}</span>
+                        </div>
+                        <p class="text-gray-300 text-sm leading-relaxed font-serif italic mt-2 md:mt-0">"${escapeHTML(msg.message)}"</p>
+                    `;
+                    messagesContainer.appendChild(card);
+                });
+            }, (error) => {
+                console.error("Error Snapshot:", error);
+            });
+        }
+
+        rsvpForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            if (!currentUser) return;
+
+            const name = document.getElementById('name').value.trim();
+            const status = document.getElementById('status').value;
+            const message = document.getElementById('message').value.trim();
+
+            submitBtn.disabled = true;
+            submitText.textContent = "Mengirim...";
+            submitSpinner.classList.remove('hidden');
+
+            try {
+                // Rule 1: Strict paths for saving data
+                const guestbookRef = collection(db, 'artifacts', appId, 'public', 'data', 'guestbook_memorial');
+                await addDoc(guestbookRef, {
+                    name,
+                    status,
+                    message,
+                    timestamp: new Date().toISOString(),
+                    userId: currentUser.uid
+                });
+                showNotification("Terima kasih, doa dan konfirmasi kehadiran telah disimpan.");
+                rsvpForm.reset();
+            } catch (error) {
+                console.error("Error Simpan:", error);
+                showNotification("Gagal mengirim data. Silakan coba lagi.", "error");
+            } finally {
+                submitBtn.disabled = false;
+                submitText.textContent = "Kirim Pesan";
+                submitSpinner.classList.add('hidden');
+            }
+        });
+
+        // Inisialisasi
+        initApp();
+    </script>
+</body>
+</html>
